@@ -1,0 +1,31 @@
+swagger: "2.0"
+info:
+  title: AI Business Assistant API
+  description: Context-aware business question answering using a local business knowledge base and TF-IDF retrieval.
+  version: "1.0.0"
+paths:
+  /api/business-question:
+    post:
+      tags: [Business AI]
+      summary: Ask a business-related question
+      consumes: [application/json]
+      produces: [application/json]
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required: [question]
+            properties:
+              question: {type: string, example: "How should I troubleshoot a network issue?"}
+              top_k: {type: integer, example: 3}
+      responses:
+        200: {description: Successful answer}
+        400: {description: Missing question}
+  /api/knowledge:
+    get:
+      tags: [Business Knowledge]
+      summary: View current business knowledge
+      responses:
+        200: {description: Knowledge records}
